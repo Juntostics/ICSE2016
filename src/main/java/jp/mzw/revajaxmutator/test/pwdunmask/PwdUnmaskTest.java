@@ -48,5 +48,4 @@ public class PwdUnmaskTest extends WebAppTestBase {
     	driver.findElement(By.id(PAPER_SUBMIT_ID)).click();
     	assertEquals(SUCCESS_RESULT, driver.findElement(By.id(RESULT_ID)).getText());
     }
-
 }
