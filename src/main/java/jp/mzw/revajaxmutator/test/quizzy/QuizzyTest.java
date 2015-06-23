@@ -71,11 +71,10 @@ public class QuizzyTest extends WebAppTestBase {
 
     @BeforeClass
     static public void launchBrowser() throws IOException {
-    	WebAppTestBase.launchBrowser();
+    	WebAppTestBase.beforeTestBaseClass();
         readProperties();
     }
 
-    @Override
     @Before
     public void setup() {
         Assume.assumeTrue(propertiesSuccessfullyRead);
