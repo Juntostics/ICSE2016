@@ -28,22 +28,8 @@ public class ImgSliderTest extends WebAppTestBase {
         		return;
         	}
         	
-        	Thread.sleep(1000); // animation
+        	Thread.sleep(500); // animation
         }
         Assert.fail("Cannot show ICSE 2016 logo");
     }
-    
-//    private static void waitSlide(final String id) {
-//        wait.until(new ExpectedCondition<Boolean>() {
-//        	public Boolean apply(WebDriver driver) {
-//        		WebElement li = driver.findElement(By.id(id));
-//        		String attr = li.getAttribute("aria-hidden");
-//        		if("false".equals(attr)) { // show
-//        			return true;
-//        		}
-//        		return false;
-//        	}
-//        });
-//    }
-    
 }

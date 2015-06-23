@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import jp.mzw.revajaxmutator.test.imgslider.ImgSliderTest;
 
@@ -66,6 +67,7 @@ public class WebAppTestBase {
         cap.setCapability(CapabilityType.PROXY, proxy);
 
         driver = new FirefoxDriver(cap);
+        wait = new WebDriverWait(driver, TIMEOUT);
     }
     
     /**
@@ -87,7 +89,7 @@ public class WebAppTestBase {
     @Before
 	public void setup() {
     	driver.get(URL);
-        wait = new WebDriverWait(driver, TIMEOUT);
+        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
     }
     
     @After
