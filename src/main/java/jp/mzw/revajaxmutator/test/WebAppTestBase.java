@@ -3,8 +3,10 @@ package jp.mzw.revajaxmutator.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Properties;
 
+import jp.mzw.revajaxmutator.FilterPlugin;
 import jp.mzw.revajaxmutator.RecorderPlugin;
 import jp.mzw.revajaxmutator.RewriterPlugin;
 
@@ -128,15 +130,27 @@ public class WebAppTestBase {
 		else if(proxy.startsWith("ram")) {
 			String dir = config.getProperty("ram_record_dir") != null ? config.getProperty("ram_record_dir") : "record";
 			
-			ProxyPlugin plugin = null;
-			if(proxy.endsWith("record")) {
-				plugin = new RecorderPlugin(dir);
-			} else if(proxy.endsWith("rewrite")) {
-				plugin  = new RewriterPlugin(dir);
+			ArrayList<ProxyPlugin> plugins = new ArrayList<ProxyPlugin>();
+			if(proxy.contains("record")) {
+				plugins.add(new RecorderPlugin(dir));
 			}
 
-			RevAjaxMutatorBase.launchProxyServer(plugin, PROXY_PORT);
+			if(proxy.contains("rewrite")) {
+				plugins.add(new RewriterPlugin(dir));
+			}
+
+			if(proxy.contains("filter")) {
+				String filter_url_prefix = config.getProperty("ram_filter_url_prefix") != null ? config.getProperty("ram_filter_url_prefix") : "http://localhost:80";
+				String filter_method = config.getProperty("ram_filter_method") != null ? config.getProperty("ram_filter_method") : "POST";
+				plugins.add(new FilterPlugin(filter_url_prefix, filter_method));
+			}
+
+			RevAjaxMutatorBase.launchProxyServer(plugins, PROXY_PORT);
 		}
+    }
+    
+    public static void filterPostCommMethod(String url_prefix) throws InterruptedException {
+    	RevAjaxMutatorBase.relaunchProxyServerWith(new FilterPlugin(url_prefix, "POST"));
     }
     
     public static void afterTestClass() {

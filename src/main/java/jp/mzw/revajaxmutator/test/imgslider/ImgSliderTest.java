@@ -36,4 +36,10 @@ public class ImgSliderTest extends WebAppTestBase {
         }
         Assert.fail("Cannot show ICSE 2016 logo");
     }
+    
+    @Test
+    public void testGetCommMethod() throws InterruptedException {
+    	WebAppTestBase.filterPostCommMethod("http://localhost:80/~yuta/imgslider/api");
+    	showICSE2016LogoTest();
+    }
 }
