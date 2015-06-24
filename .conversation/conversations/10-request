@@ -1,0 +1,10 @@
+GET http://localhost:80/~yuta/imgslider/api/index.php?conf=icse HTTP/1.1
+Host: localhost
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:24.0) Gecko/20100101 Firefox/24.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Referer: http://localhost/~yuta/imgslider/
+Connection: keep-alive
+

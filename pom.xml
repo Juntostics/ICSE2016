@@ -4,6 +4,13 @@
 	<groupId>jp.mzw.revajaxmutator</groupId>
 	<artifactId>RevAjaxMutatorTest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<repositories>
+		<repository>
+			<id>crawljax.mvn.repo</id>
+			<url>https://github.com/crawljax/crawljax-mvn-repo</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -20,6 +27,11 @@
 			<groupId>com.github.tntim96</groupId>
 			<artifactId>JSCover</artifactId>
 			<version>1.0.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.owasp.webscarab</groupId>
+			<artifactId>WebScarab</artifactId>
+			<version>1.0.0-20131701</version>
 		</dependency>
 	</dependencies>
 

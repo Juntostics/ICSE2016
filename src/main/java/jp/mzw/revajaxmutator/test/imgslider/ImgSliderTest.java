@@ -3,20 +3,24 @@ package jp.mzw.revajaxmutator.test.imgslider;
 import org.junit.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.*;
+import org.owasp.webscarab.model.StoreException;
 
 import jp.mzw.revajaxmutator.test.WebAppTestBase;
 
 public class ImgSliderTest extends WebAppTestBase {
 	
     @BeforeClass
-    public static void beforeTestClass() throws java.io.IOException {
+    public static void beforeTestClass() throws java.io.IOException, StoreException, InterruptedException {
     	WebAppTestBase.beforeTestClass("imgslider.properties");
+    }
+    
+    @AfterClass
+    public static void afterTestClass() {
+    	WebAppTestBase.afterTestClass();
     }
     
     @Test
     public void showICSE2016LogoTest() throws InterruptedException {
-    	driver.get(URL);
-    	
         wait.until(ExpectedConditions.elementToBeClickable(By.className("bx-next")));
     	WebElement next_btn = driver.findElement(By.className("bx-next"));
     	

@@ -4,22 +4,22 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
-import jp.mzw.revajaxmutator.test.imgslider.ImgSliderTest;
+import jp.mzw.revajaxmutator.RecorderPlugin;
+import jp.mzw.revajaxmutator.RewriterPlugin;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.owasp.webscarab.model.StoreException;
+import org.owasp.webscarab.plugin.proxy.ProxyPlugin;
 
 public class WebAppTestBase {
 
@@ -67,7 +67,6 @@ public class WebAppTestBase {
         cap.setCapability(CapabilityType.PROXY, proxy);
 
         driver = new FirefoxDriver(cap);
-        wait = new WebDriverWait(driver, TIMEOUT);
     }
     
     /**
@@ -75,9 +74,7 @@ public class WebAppTestBase {
      * @throws IOException indicates "localenv.properties" not found on the resource path
      */
 	private static void readTestBaseConfig() throws IOException {
-		InputStream is = WebAppTestBase.class.getClassLoader().getResourceAsStream(CONFIG_FILENAME);
-		CONFIG = new Properties();
-		CONFIG.load(is);
+		CONFIG = getConfig(CONFIG_FILENAME);
 
 		URL = CONFIG.getProperty("url") != null ? CONFIG.getProperty("url") : "" ;
 		FIREFOX_BIN = CONFIG.getProperty("firefox-bin");
@@ -87,9 +84,9 @@ public class WebAppTestBase {
 	}
 
     @Before
-	public void setup() {
+	public void setup() throws InterruptedException {
     	driver.get(URL);
-        driver.manage().timeouts().implicitlyWait(300, TimeUnit.MILLISECONDS);
+        wait = new WebDriverWait(driver, TIMEOUT);
     }
     
     @After
@@ -99,81 +96,53 @@ public class WebAppTestBase {
     
     @AfterClass
     public static void afterTestBaseClass() {
-    	if(JSCOVER) {
-    		interruptProxyServer();
-    	}
     	quitBrowser();
     }
     
-    public static void quitBrowser() {
+    private static void quitBrowser() {
         driver.quit();
+    }
+    
+    protected static Properties getConfig(String filename) throws IOException {
+		InputStream is = WebAppTestBase.class.getClassLoader().getResourceAsStream(filename);
+		Properties config = new Properties();
+		config.load(is);
+    	return config;
     }
     
     /*--------------------------------------------------
 		For test classes
      --------------------------------------------------*/
-    protected static boolean JSCOVER;
-	private static Thread server;
-	protected static String JSCOVER_URL = "http://localhost/jscoverage.html";
-	protected static String JSCOVER_REPORT_DIR;
-	protected static String JSCOVER_REPORT_FILE = "jscoverage.json";
-	
-    public static void beforeTestClass(String filename) throws IOException {
-		InputStream is = ImgSliderTest.class.getClassLoader().getResourceAsStream(filename);
-		Properties config = new Properties();
-		config.load(is);
+    public static void beforeTestClass(String filename) throws IOException, StoreException, InterruptedException {
+    	Properties config = getConfig(filename);
 		
-		URL = config.getProperty("url") != null ? config.getProperty("url") : "" ;
+		URL = config.getProperty("url") != null ? config.getProperty("url") : "";
 		
-		JSCOVER = config.getProperty("jscover") != null ? Boolean.parseBoolean(config.getProperty("jscover")) : false;
-		JSCOVER_REPORT_DIR = config.getProperty("jscover_report_dir") != null ? config.getProperty("jscover_report_dir") : "jscover";
-		if(JSCOVER) {
-			launchProxyServer();
+		String proxy = config.getProperty("proxy") != null ? config.getProperty("proxy") : "";
+		// JSCover
+		if("jscover".equals(proxy)) {
+			String dir = config.getProperty("jscover_report_dir") != null ? config.getProperty("jscover_report_dir") : "jscover";
+			JSCoverBase.launchProxyServer(dir, PROXY_PORT);
 		}
-    }
+		// RevAjaxMutator
+		else if(proxy.startsWith("ram")) {
+			String dir = config.getProperty("ram_record_dir") != null ? config.getProperty("ram_record_dir") : "record";
+			
+			ProxyPlugin plugin = null;
+			if(proxy.endsWith("record")) {
+				plugin = new RecorderPlugin(dir);
+			} else if(proxy.endsWith("rewrite")) {
+				plugin  = new RewriterPlugin(dir);
+			}
 
-    /**
-     * Launch proxy server for JSCover
-     */
-	public static void launchProxyServer() {
-		File cov_result = new File(JSCOVER_REPORT_DIR, JSCOVER_REPORT_FILE);
-        if (cov_result.exists()) cov_result.delete();
-        
-		if(server == null) {
-			server = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					jscover.Main.main(new String[]{
-							"-ws",
-							"--port=" + PROXY_PORT,
-							"--proxy",
-							"--local-storage",
-							"--report-dir=" + JSCOVER_REPORT_DIR,
-							"--no-instrument-reg=.*jquery.*",
-							"--no-instrument-reg=.*bootstrap.*",
-					});
-				}
-			});
-			server.start();
+			RevAjaxMutatorBase.launchProxyServer(plugin, PROXY_PORT);
 		}
-	}
-    
-	/**
-	 * Interrupt proxy server for JSCover
-	 */
-    @SuppressWarnings("deprecation")
-	public static void interruptProxyServer() {
-        driver.get(JSCOVER_URL);
-        
-        new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.elementToBeClickable(By.id("storeTab"))).click();
-        driver.findElement(By.id("storeTab")).click();
-        
-        new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.elementToBeClickable(By.id("storeButton")));
-        driver.findElement(By.id("storeButton")).click();
-        
-        new WebDriverWait(driver, TIMEOUT).until(ExpectedConditions.textToBePresentInElement(By.id("storeDiv"), "Coverage data stored at"));
-        
-        server.interrupt();
     }
+    
+    public static void afterTestClass() {
+    	JSCoverBase.interruptProxyServer(driver, TIMEOUT);
+    	RevAjaxMutatorBase.interruptProxyServer();
+    }
+	
 
 }

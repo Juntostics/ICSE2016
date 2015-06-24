@@ -1,0 +1,9 @@
+GET http://localhost:80/~yuta/imgslider/js/jquery.bxslider.js HTTP/1.1
+Host: localhost
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:24.0) Gecko/20100101 Firefox/24.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: http://localhost/~yuta/imgslider/
+Connection: keep-alive
+
