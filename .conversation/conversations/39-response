@@ -1,0 +1,31 @@
+HTTP/1.1 200 OK
+Date: Wed, 24 Jun 2015 16:16:42 GMT
+Server: Apache/2.4.12 (Unix) PHP/5.6.9
+Last-Modified: Wed, 24 Jun 2015 16:15:57 GMT
+ETag: "16e-51945d267a940"
+Accept-Ranges: bytes
+Content-Length: 366
+Keep-Alive: timeout=5, max=99
+Connection: Keep-Alive
+Content-Type: application/javascript
+
+$(document).ready(function($) {
+	$.post(
+		"api/index.php",
+		{ conf: "icse" },
+		createSlider
+	);
+});
+
+function createSlider(data) {
+	for(var key in data) {
+		var img = $("<img>")
+			.attr("width", "400px")
+			.attr("src", "img/icse/" + data[key]);
+		$("#slider").append($("<li>").attr("id", key).append(img));
+	}
+
+	$("#slider").bxSlider({
+		slideWidth: 400,
+	});
+}

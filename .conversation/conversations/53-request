@@ -1,0 +1,9 @@
+GET https://ssl.gstatic.com:443/gb/js/sem_e16e763ea7cd71743f860ae3d73bd33c.js HTTP/1.1
+Host: ssl.gstatic.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.10; rv:24.0) Gecko/20100101 Firefox/24.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Referer: https://www.google.co.jp/?gfe_rd=cr&ei=6teKVbabOozN8gewloDYCA&gws_rd=ssl
+Connection: keep-alive
+

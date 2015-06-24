@@ -1,0 +1,20 @@
+HTTP/1.1 302 Found
+Location: https://www.google.co.jp/?gfe_rd=cr&ei=6teKVbabOozN8gewloDYCA&gws_rd=ssl
+Cache-Control: private
+Content-Type: text/html; charset=UTF-8
+P3P: CP="This is not a P3P policy! See http://www.google.com/support/accounts/bin/answer.py?hl=en&answer=151657 for more info."
+Date: Wed, 24 Jun 2015 16:16:43 GMT
+Server: gws
+Content-Length: 277
+X-XSS-Protection: 1; mode=block
+X-Frame-Options: SAMEORIGIN
+Set-Cookie: PREF=ID=1111111111111111:FF=0:TM=1435162603:LM=1435162603:V=1:S=9VWqcHy5EX14xr9l; expires=Fri, 23-Jun-2017 16:16:43 GMT; path=/; domain=.google.co.jp
+Set-Cookie: NID=68=ngMHdm72E3aCfajWVa373N3D9LDCFbrKA0VeS-5XE1PYY5LcY_97S8yUIfMAlRKsSkcdpGE-3qidZ2VPycqOLvnIbRSAlRrANiDVDu-2cLNc6NLaBbRruBFrs3p8NzZf; expires=Thu, 24-Dec-2015 16:16:43 GMT; path=/; domain=.google.co.jp; HttpOnly
+Alternate-Protocol: 80:quic,p=0
+
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>302 Moved</TITLE></HEAD><BODY>
+<H1>302 Moved</H1>
+The document has moved
+<A HREF="https://www.google.co.jp/?gfe_rd=cr&amp;ei=6teKVbabOozN8gewloDYCA&amp;gws_rd=ssl">here</A>.
+</BODY></HTML>

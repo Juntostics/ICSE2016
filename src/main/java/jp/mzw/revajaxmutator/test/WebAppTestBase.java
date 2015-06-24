@@ -149,7 +149,7 @@ public class WebAppTestBase {
 		}
     }
     
-    public static void filterPostCommMethod(String url_prefix) throws InterruptedException {
+    public static void filterPostCommMethod(String url_prefix) throws InterruptedException, StoreException {
     	RevAjaxMutatorBase.relaunchProxyServerWith(new FilterPlugin(url_prefix, "POST"));
     }
     
