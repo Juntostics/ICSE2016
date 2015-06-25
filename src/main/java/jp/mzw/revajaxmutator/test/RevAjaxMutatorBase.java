@@ -13,13 +13,8 @@ import org.owasp.webscarab.plugin.proxy.ProxyPlugin;
 
 public class RevAjaxMutatorBase {
 	private static Proxy mProxy;
-	private static List<ProxyPlugin> mPlugins;
-	private static String mPort;
 	
 	public static void launchProxyServer(List<ProxyPlugin> plugins, String port) throws StoreException, InterruptedException {
-		mPlugins = plugins;
-		mPort = port;
-		
         Framework framework = new Framework();
         Preferences.setPreference("Proxy.listeners", "127.0.0.1:" + port);
         framework.setSession("FileSystem", new File(".conversation"), "");
@@ -34,19 +29,22 @@ public class RevAjaxMutatorBase {
 	}
 
     public static void relaunchProxyServerWith(FilterPlugin filter_plugin) throws InterruptedException, StoreException {
-    	if(mProxy.stop()) {
-//    		mPlugins.add(filter_plugin);
-//            for(ProxyPlugin plugin : mPlugins) {
-//            	mProxy.addPlugin(plugin);
-//            }
+    	if(mProxy != null && mProxy.stop()) {
     		mProxy.addPlugin(filter_plugin);
-    		System.out.println(mProxy.getPlugin("FilterPlugin"));
     		mProxy.run();
     		Thread.sleep(300); // wait for launching proxy server
     	}
     }
-	
-	
+    
+    public static void disableFilterPlugin() throws InterruptedException {
+    	if(mProxy != null && mProxy.stop()) {
+    		FilterPlugin filter_plugin = (FilterPlugin) mProxy.getPlugin("FilterPlugin");
+    		filter_plugin.setEnabled(false);
+    		mProxy.run();
+    		Thread.sleep(300); // wait for launching proxy server
+    	}
+    }
+    
     public static void interruptProxyServer() {
     	if(mProxy != null) {
     		mProxy.stop();

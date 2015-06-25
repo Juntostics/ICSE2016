@@ -69,6 +69,7 @@ public class WebAppTestBase {
         cap.setCapability(CapabilityType.PROXY, proxy);
 
         driver = new FirefoxDriver(cap);
+        wait = new WebDriverWait(driver, TIMEOUT);
     }
     
     /**
@@ -78,7 +79,6 @@ public class WebAppTestBase {
 	private static void readTestBaseConfig() throws IOException {
 		CONFIG = getConfig(CONFIG_FILENAME);
 
-		URL = CONFIG.getProperty("url") != null ? CONFIG.getProperty("url") : "" ;
 		FIREFOX_BIN = CONFIG.getProperty("firefox-bin");
 		PROXY_PORT = CONFIG.getProperty("proxy_port") != null ? CONFIG.getProperty("proxy_port") : "80";
 		PROXY = "127.0.0.1:" + PROXY_PORT;
@@ -87,8 +87,7 @@ public class WebAppTestBase {
 
     @Before
 	public void setup() throws InterruptedException {
-    	driver.get(URL);
-        wait = new WebDriverWait(driver, TIMEOUT);
+    	// NOP
     }
     
     @After
@@ -149,14 +148,8 @@ public class WebAppTestBase {
 		}
     }
     
-    public static void filterPostCommMethod(String url_prefix) throws InterruptedException, StoreException {
-    	RevAjaxMutatorBase.relaunchProxyServerWith(new FilterPlugin(url_prefix, "POST"));
-    }
-    
     public static void afterTestClass() {
     	JSCoverBase.interruptProxyServer(driver, TIMEOUT);
     	RevAjaxMutatorBase.interruptProxyServer();
     }
-	
-
 }
