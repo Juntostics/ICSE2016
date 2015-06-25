@@ -1,1 +1,10 @@
 /target/
+
+.classpath
+.project
+
+.settings
+
+.conversation
+.keystore
+
