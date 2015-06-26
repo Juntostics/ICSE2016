@@ -45,4 +45,45 @@ public class ImgSliderTest extends WebAppTestBase {
 		Assert.fail("Cannot show ICSE 2016 logo");
 	}
 
+	@Test
+	public void testGetCommMethod() throws InterruptedException, IOException, StoreException {
+		// filter POST communications
+		RevAjaxMutatorBase.relaunchProxyServerWith(
+				new FilterPlugin("http://localhost:80/~yuta/imgslider/api", "POST"));
+		disableFilterPlugin = true;
+
+		driver.get(URL);
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.className("bx-next")));
+		WebElement next_btn = driver.findElement(By.className("bx-next"));
+
+		for (int year = 1999; year <= 2016; year++) {
+			next_btn.click();
+
+			String hidden = driver.findElement(By.id("2016")).getAttribute("aria-hidden");
+			if ("false".equals(hidden)) {
+				RevAjaxMutatorBase.disableFilterPlugin();
+				return;
+			}
+
+			Thread.sleep(500); // animation
+		}
+		Assert.fail("Cannot show ICSE 2016 logo");
+	}
+
+	private boolean disableFilterPlugin = false;
+	@Rule
+	public TestWatcher watchman = new TestWatcher() {
+		@Override
+		protected void failed(Throwable th, Description d) {
+			try {
+				if(disableFilterPlugin) {
+					RevAjaxMutatorBase.disableFilterPlugin();
+					disableFilterPlugin = false;
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	};
 }
