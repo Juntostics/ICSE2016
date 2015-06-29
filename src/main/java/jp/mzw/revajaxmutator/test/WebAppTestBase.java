@@ -123,7 +123,10 @@ public class WebAppTestBase {
 		// JSCover
 		if("jscover".equals(proxy)) {
 			String dir = config.getProperty("jscover_report_dir") != null ? config.getProperty("jscover_report_dir") : "jscover";
-			JSCoverBase.launchProxyServer(dir, PROXY_PORT);
+			String instr = config.getProperty("jscover_instr_regx") != null ? config.getProperty("jscover_instr_regx") : "";
+			String no_instr = config.getProperty("jscover_no_instr_regx") != null ? config.getProperty("jscover_no_instr_regx") : "";
+			
+			JSCoverBase.launchProxyServer(dir, PROXY_PORT, instr.split(","), no_instr.split(","));
 		}
 		// RevAjaxMutator
 		else if(proxy.startsWith("ram")) {
