@@ -7,10 +7,6 @@
 
 	<repositories>
 		<repository>
-			<id>crawljax.mvn.repo</id>
-			<url>https://github.com/crawljax/crawljax-mvn-repo</url>
-		</repository>
-		<repository>
 			<id>mzw.mvn.repo</id>
 			<url>http://mzw.jp/mvn-repo</url>
 		</repository>
@@ -35,7 +31,7 @@
 		<dependency>
 			<groupId>org.owasp.webscarab</groupId>
 			<artifactId>WebScarab</artifactId>
-			<version>1.0.0-20131701</version>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>jp.mzw.revajaxmutator</groupId>
