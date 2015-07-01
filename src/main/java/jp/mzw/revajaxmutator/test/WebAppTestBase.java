@@ -104,7 +104,7 @@ public class WebAppTestBase {
         driver.quit();
     }
     
-    protected static Properties getConfig(String filename) throws IOException {
+    public static Properties getConfig(String filename) throws IOException {
 		InputStream is = WebAppTestBase.class.getClassLoader().getResourceAsStream(filename);
 		Properties config = new Properties();
 		config.load(is);
