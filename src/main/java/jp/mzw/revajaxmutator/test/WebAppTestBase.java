@@ -101,7 +101,7 @@ public class WebAppTestBase {
     }
     
     private static void quitBrowser() {
-        driver.quit();
+    	driver.quit();
     }
     
     protected static Properties getConfig(String filename) throws IOException {

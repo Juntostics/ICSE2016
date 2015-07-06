@@ -24,6 +24,7 @@ public class ImgSliderTest extends WebAppTestBase {
 	public static void afterTestClass() {
 		WebAppTestBase.afterTestClass();
 	}
+//	private static String URL = "http://localhost/imgslider/";
 
 	@Test
 	public void showICSE2016LogoTest() throws InterruptedException {
@@ -40,7 +41,7 @@ public class ImgSliderTest extends WebAppTestBase {
 				return;
 			}
 
-			Thread.sleep(300); // animation
+			Thread.sleep(500); // animation
 		}
 		Assert.fail("Cannot show ICSE 2016 logo");
 	}
@@ -49,7 +50,7 @@ public class ImgSliderTest extends WebAppTestBase {
 	public void testGetCommMethod() throws InterruptedException, IOException, StoreException {
 		// filter POST communications
 		RevAjaxMutatorBase.relaunchProxyServerWith(
-				new FilterPlugin("http://localhost:80/~yuta/imgslider/api", "POST"));
+				new FilterPlugin("http://localhost:80/imgslider/api", "POST"));
 		disableFilterPlugin = true;
 
 		driver.get(URL);
