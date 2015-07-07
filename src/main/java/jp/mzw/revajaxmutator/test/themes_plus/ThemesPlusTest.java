@@ -15,13 +15,13 @@ import org.owasp.webscarab.model.StoreException;
 public class ThemesPlusTest extends WebAppTestBase {
 	@BeforeClass
 	public static void beforeTestClass() throws StoreException, InterruptedException, IOException {
-		WebAppTestBase.beforeTestClass("themes-plus.properties");
+//		Properties config = getConfig("themes-plus.properties");
+//		String dumpfile = config.getProperty("mysql_dump_file") != null ? config.getProperty("mysql_dump_file") : null;
+//		if(dumpfile != null) {
+//			DockerManager.runContainer4WpPluginTest("mysql", dumpfile, "yuta/tp");
+//		}
 		
-		Properties config = getConfig("themes-plus.properties");
-		String dumpfile = config.getProperty("mysql_dump_file") != null ? config.getProperty("mysql_dump_file") : null;
-		if(dumpfile != null) {
-			DockerManager.runContainer4WpPluginTest(dumpfile);
-		}
+		WebAppTestBase.beforeTestClass("themes-plus.properties");
 	}
 
 	@AfterClass

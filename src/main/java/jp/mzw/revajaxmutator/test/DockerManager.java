@@ -31,18 +31,18 @@ public class DockerManager {
 			};
 	
 	public static void main(String[] args) throws IOException {
-		runContainer4ThemesPlusTest();
+		runContainer4WpPluginTest("mysql", "docker/blip-slideshow/wp-dbbase.dump.sql", "wp");
+//		runContainer4WpPluginTest("mysql", "docker/tagged-gallery/wp-dbbase.dump.sql", "wp");
+//		runContainer4WpPluginTest("mysql", "docker/themes-plus/wp-dbbase.dump.sql", "wp");
 	}
 	
-	public static void runContainer4ThemesPlusTest() throws IOException {
-		String dumpfile = "docker/themes-plus/wp-dbbase.dump.sql";
-		
+	public static void runContainer4WpPluginTest(String mysql_tagname, String dumpfile, String wp_tagname) throws IOException {
 		cleanContainer();
 		
 		// Precondition: $ docker build -t mysql docker/mysql/5.5/
 		log.info("Instantiating MySQL container");
 		String result_mysql_run = exec(new String[]{DOCKER, "run", "-d", "-p", "3306:3306",
-				"-e", "MYSQL_PASS=mypass", "--name=mysql.tp", "mysql",
+				"-e", "MYSQL_PASS=mypass", "--name=mysql", mysql_tagname,
 				},
 				DOCKER_ENV);
 		log.info(result_mysql_run);
@@ -64,40 +64,7 @@ public class DockerManager {
 		// Precondition: $ docker build -t yuta/bs --rm=true docker/themes-plus/
 		log.info("Instantiating WordPress container");
 		String result_wp_run = exec(new String[]{DOCKER, "run", "-d", "-p", "80:80", "-p", "10022:22",
-				"--name=wp.tp", "yuta/tp"},
-				DOCKER_ENV);
-		log.info(result_wp_run);
-	}
-	
-	public static void runContainer4WpPluginTest(String dumpfile) throws IOException {
-		cleanContainer();
-		
-		// Precondition: $ docker build -t mysql docker/mysql/5.5/
-		log.info("Instantiating MySQL container");
-		String result_mysql_run = exec(new String[]{DOCKER, "run", "-d", "-p", "3306:3306",
-				"-e", "MYSQL_PASS=mypass", "--name=mysql.tp", "mysql",
-				},
-				DOCKER_ENV);
-		log.info(result_mysql_run);
-		
-		// Workaround: wait for launching mysql server
-		try {
-			Thread.sleep(3000); // heuristic
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		log.info("Loading dump file to MySQL container");
-		String reuslt_mysql_load_dump = exec(new String[]{
-				BASH, "-c",
-				MYSQL + " --defaults-extra-file=" + MYSQL_MYCONF + " --verbose < " + dumpfile,
-				}, null);
-		log.info(reuslt_mysql_load_dump);
-		
-		// Precondition: $ docker build -t yuta/bs --rm=true docker/themes-plus/
-		log.info("Instantiating WordPress container");
-		String result_wp_run = exec(new String[]{DOCKER, "run", "-d", "-p", "80:80", "-p", "10022:22",
-				"--name=wp.tp", "yuta/tp"},
+				"--name=wp", wp_tagname},
 				DOCKER_ENV);
 		log.info(result_wp_run);
 	}
