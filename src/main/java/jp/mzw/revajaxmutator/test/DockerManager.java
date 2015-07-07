@@ -34,7 +34,10 @@ public class DockerManager {
 //		runContainer4WpPluginTest("mysql", "docker/blip-slideshow/wp-dbbase.dump.sql", "yuta/bs");
 //		runContainer4WpPluginTest("mysql", "docker/tagged-gallery/wp-dbbase.dump.sql", "yuta/tg");
 //		runContainer4WpPluginTest("mysql", "docker/themes-plus/wp-dbbase.dump.sql", "yuta/tp");
-		runContainer4WpPluginTest("mysql", "docker/gmedia-gallery/wp-dbbase.dump.sql", "yuta/gg");
+//		runContainer4WpPluginTest("mysql", "docker/gmedia-gallery/wp-dbbase.dump.sql", "yuta/gg");
+		runContainer4WpPluginTest("mysql", "docker/editorial-calendar/wp-dbbase.dump.sql", "yuta/ec");
+		
+//		cleanContainer();
 	}
 	
 	public static void runContainer4WpPluginTest(String mysql_tagname, String dumpfile, String wp_tagname) throws IOException {
