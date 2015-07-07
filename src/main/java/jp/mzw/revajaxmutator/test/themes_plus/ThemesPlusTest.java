@@ -13,7 +13,7 @@ import org.owasp.webscarab.model.StoreException;
 public class ThemesPlusTest extends WebAppTestBase {
 	@BeforeClass
 	public static void beforeTestClass() throws StoreException, InterruptedException, IOException {
-		WebAppTestBase.beforeTestClass("themesplus.properties");
+		WebAppTestBase.beforeTestClass("themes-plus.properties");
 	}
 
 	@AfterClass
