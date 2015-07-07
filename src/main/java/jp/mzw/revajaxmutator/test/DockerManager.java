@@ -31,15 +31,16 @@ public class DockerManager {
 			};
 	
 	public static void main(String[] args) throws IOException {
-		runContainer4WpPluginTest("mysql", "docker/blip-slideshow/wp-dbbase.dump.sql", "yuta/bs");
+//		runContainer4WpPluginTest("mysql", "docker/blip-slideshow/wp-dbbase.dump.sql", "yuta/bs");
 //		runContainer4WpPluginTest("mysql", "docker/tagged-gallery/wp-dbbase.dump.sql", "yuta/tg");
 //		runContainer4WpPluginTest("mysql", "docker/themes-plus/wp-dbbase.dump.sql", "yuta/tp");
+		runContainer4WpPluginTest("mysql", "docker/gmedia-gallery/wp-dbbase.dump.sql", "yuta/gg");
 	}
 	
 	public static void runContainer4WpPluginTest(String mysql_tagname, String dumpfile, String wp_tagname) throws IOException {
 		cleanContainer();
 		
-		// Precondition: $ docker build -t mysql docker/mysql/5.5/
+		// Precondition: $ docker build -t <mysql_tagname> docker/mysql/5.5/
 		log.info("Instantiating MySQL container");
 		String result_mysql_run = exec(new String[]{DOCKER, "run", "-d", "-p", "3306:3306",
 				"-e", "MYSQL_PASS=mypass", "--name=mysql", mysql_tagname,
@@ -61,7 +62,7 @@ public class DockerManager {
 				}, null);
 		log.info(reuslt_mysql_load_dump);
 		
-		// Precondition: $ docker build -t yuta/bs --rm=true docker/themes-plus/
+		// Precondition: $ docker build -t <wp_tagname> --rm=true docker/themes-plus/
 		log.info("Instantiating WordPress container");
 		String result_wp_run = exec(new String[]{DOCKER, "run", "-d", "-p", "80:80", "-p", "10022:22",
 				"--name=wp", wp_tagname},
