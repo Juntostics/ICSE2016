@@ -13,7 +13,7 @@ import jp.mzw.revajaxmutator.test.WebAppTestBase;
 public class BlipSlideshowTest extends WebAppTestBase {
 	@BeforeClass
 	public static void beforeTestClass() throws StoreException, InterruptedException, IOException {
-		WebAppTestBase.beforeTestClass("blipslideshow.properties");
+		WebAppTestBase.beforeTestClass("blip-slideshow.properties");
 	}
 
 	@AfterClass
