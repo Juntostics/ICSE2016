@@ -2,7 +2,9 @@ package jp.mzw.revajaxmutator.test.themes_plus;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
+import jp.mzw.revajaxmutator.test.DockerManager;
 import jp.mzw.revajaxmutator.test.WebAppTestBase;
 
 import org.junit.*;
@@ -14,6 +16,12 @@ public class ThemesPlusTest extends WebAppTestBase {
 	@BeforeClass
 	public static void beforeTestClass() throws StoreException, InterruptedException, IOException {
 		WebAppTestBase.beforeTestClass("themes-plus.properties");
+		
+		Properties config = getConfig("themes-plus.properties");
+		String dumpfile = config.getProperty("mysql_dump_file") != null ? config.getProperty("mysql_dump_file") : null;
+		if(dumpfile != null) {
+			DockerManager.runContainer4WpPluginTest(dumpfile);
+		}
 	}
 
 	@AfterClass
