@@ -20,7 +20,7 @@
 --
 
 -- Added by yuta
-CREATE DATABASE wp;
+CREATE DATABASE IF NOT EXISTS wp;
 USE wp;
 -- end
 
