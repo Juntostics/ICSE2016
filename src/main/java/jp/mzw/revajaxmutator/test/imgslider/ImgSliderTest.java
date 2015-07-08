@@ -49,7 +49,7 @@ public class ImgSliderTest extends WebAppTestBase {
 	public void testGetCommMethod() throws InterruptedException, IOException, StoreException {
 		// filter POST communications
 		RevAjaxMutatorBase.relaunchProxyServerWith(
-				new FilterPlugin("http://localhost:80/~yuta/imgslider/api", "POST"));
+				new FilterPlugin(".*http://localhost:80/~yuta/imgslider/api.*", "POST"));
 		disableFilterPlugin = true;
 
 		driver.get(URL);

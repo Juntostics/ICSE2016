@@ -1,5 +1,6 @@
 package jp.mzw.revajaxmutator.test.blip_slideshow;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
@@ -29,16 +30,13 @@ public class BlipSlideshowTest extends WebAppTestBase {
 		WebAppTestBase.afterTestClass();
 	}
 
-
 	@Test
 	public void displaySlideshow() throws InterruptedException {
 		driver.get(URL);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-1")));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-1")));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-2")));
 		
-		WebElement elm = driver.findElement(By.xpath("//*[@id='show-1']/div[1]/a[1]"));
+		WebElement elm = driver.findElement(By.xpath("//*[@id='show-2']/div[1]/a[1]"));
 		elm.click();
-		Thread.sleep(3000);
 	}
-	
 }
