@@ -45,6 +45,17 @@ public class ThemesPlusTest extends WebAppTestBase {
 		Assert.assertTrue(startSecond > endSecond);
 	}
 	
+	@Test
+	public void checkWorking() throws Exception {
+		driver.get(URL);
+		try{
+			List<WebElement> spans = driver.findElement(By.id("timer")).findElements(By.tagName("span"));
+			Assert.assertTrue(spans.size() > 0);			
+		} catch (NoSuchElementException e) {
+			Assert.assertTrue(false);
+		}
+	}	
+	
 	private void waitUntilCountdownTimerDigitsToBePresent(){
 		WebDriverWait countdownWait = new WebDriverWait(driver, TIMEOUT);
 		countdownWait.until(new ExpectedCondition<Boolean>(){
