@@ -49,7 +49,7 @@ public class TaggedGalleryTest extends WebAppTestBase {
 	}
 	
 	@Test
-	public void goal_test() throws Exception {
+	public void targetImageSrcTest() throws Exception {
 		driver.get(URL);
 		WebElement imgParent = driver.findElements(By.className("tg-thumb")).get(0)
 				.findElement(By.tagName("img"));
@@ -60,10 +60,51 @@ public class TaggedGalleryTest extends WebAppTestBase {
 			
 			// src doesn't contain "null"
 			Assert.assertTrue(!src.contains("null"));
-//			Assert.assertEquals(src, "http://192.168.59.103/wp-content/plugins/tagged-gallery/img.php?img=http://192.168.59.103/wp-content/uploads/2015/07/icse2016-logo.jpg&size=700x700");
 		} catch (NoSuchElementException e) {
 			
 		}
 	}
-
+	
+	@Test
+	public void changeWindowSizeTest() throws Exception {
+		driver.get(URL);
+		driver.manage().window().setSize(new Dimension(50, 50));
+		driver.findElements(By.className("tg-thumb")).get(0)
+			.findElement(By.tagName("img")).click();
+		driver.manage().window().setSize(new Dimension(500, 500));
+		try {
+			driver.findElement(By.xpath("/html/body/div[2]")).click();;
+			Assert.assertTrue(true);
+		} catch (NoSuchElementException e) {
+			Assert.assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void clickOverImageTest() throws Exception {
+		driver.manage().window().setSize(new Dimension(50, 50));
+		driver.get(URL);
+		driver.findElements(By.className("tg-thumb")).get(0)
+			.findElement(By.tagName("img")).click();
+		try {
+			driver.findElement(By.className("overlayimg")).click();
+			Assert.assertTrue(true);
+		} catch (NoSuchElementException e) {
+			Assert.assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void clickImageTest() throws Exception {
+		driver.manage().window().setSize(new Dimension(1000, 1000));
+		driver.get(URL);
+		driver.findElements(By.className("tg-thumb")).get(0)
+			.findElement(By.tagName("img")).click();
+		try {
+			driver.findElement(By.className("overlayimg")).click();
+			Assert.assertTrue(true);
+		} catch (NoSuchElementException e) {
+			Assert.assertTrue(false);
+		}
+	}
 }
