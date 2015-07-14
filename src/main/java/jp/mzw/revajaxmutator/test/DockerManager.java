@@ -26,14 +26,14 @@ public class DockerManager {
 	static String BOOT2DOCKER_IP = "192.168.59.103";
 	static String[] DOCKER_ENV = {
 			"DOCKER_HOST=tcp://"+BOOT2DOCKER_IP+":2376",
-			"DOCKER_CERT_PATH=/Users/yuta/.boot2docker/certs/boot2docker-vm",
+			"DOCKER_CERT_PATH=/Users/hnd-lab/.boot2docker/certs/boot2docker-vm",
 			"DOCKER_TLS_VERIFY=1"
 			};
 	
 	public static void main(String[] args) throws IOException {
-		runContainer4WpPluginTest("mysql", "docker/blip-slideshow/wp-dbbase.dump.sql", "yuta/bs");
+//		runContainer4WpPluginTest("mysql", "docker/blip-slideshow/wp-dbbase.dump.sql", "yuta/bs");
 //		runContainer4WpPluginTest("mysql", "docker/tagged-gallery/wp-dbbase.dump.sql", "yuta/tg");
-//		runContainer4WpPluginTest("mysql", "docker/themes-plus/wp-dbbase.dump.sql", "yuta/tp");
+		runContainer4WpPluginTest("mysql", "docker/themes-plus/wp-dbbase.dump.sql", "yuta/tp");
 //		runContainer4WpPluginTest("mysql", "docker/gmedia-gallery/wp-dbbase.dump.sql", "yuta/gg");
 //		runContainer4WpPluginTest("mysql", "docker/editorial-calendar/wp-dbbase.dump.sql", "yuta/ec");
 //		runContainer4WpPluginTest("mysql", "docker/smart-forms/wp-dbbase.dump.sql", "yuta/sf");

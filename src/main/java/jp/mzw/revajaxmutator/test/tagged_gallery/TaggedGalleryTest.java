@@ -18,6 +18,7 @@ public class TaggedGalleryTest extends WebAppTestBase {
 	@BeforeClass
 	public static void beforeTestClass() throws StoreException, InterruptedException, IOException {		
 		WebAppTestBase.beforeTestClass("tagged-gallery.properties");
+		driver.manage().window().setSize(new Dimension(50, 50));
 	}
 
 	@AfterClass
@@ -34,18 +35,6 @@ public class TaggedGalleryTest extends WebAppTestBase {
 			e.printStackTrace();
 		}
 //		WebAppTestBase.afterTestClass();
-	}
-
-	@Test
-	public void test() throws Exception {
-		driver.get(URL);
-		driver.findElements(By.className("tg-thumb")).get(0)
-				.findElement(By.tagName("img")).click();
-		try {
-			driver.findElement(By.id("overlay"));
-		} catch (NoSuchElementException e) {
-			Assert.assertTrue(false);
-		}
 	}
 	
 	@Test
@@ -102,6 +91,34 @@ public class TaggedGalleryTest extends WebAppTestBase {
 			.findElement(By.tagName("img")).click();
 		try {
 			driver.findElement(By.className("overlayimg")).click();
+			Assert.assertTrue(true);
+		} catch (NoSuchElementException e) {
+			Assert.assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void largeImageTest() throws Exception {
+		driver.manage().window().setSize(new Dimension(300, 1000));
+		driver.get(URL);
+		driver.navigate().refresh();
+		driver.findElements(By.className("tg-thumb")).get(1)
+			.findElement(By.tagName("img")).click();
+		driver.manage().window().setSize(new Dimension(150, 1000));
+		Thread.sleep(1000);
+		driver.manage().window().setSize(new Dimension(1000, 1000));
+		Thread.sleep(1000);
+		driver.manage().window().setSize(new Dimension(400, 1000));
+		Thread.sleep(1000);
+		driver.manage().window().setSize(new Dimension(350, 1000));
+		Thread.sleep(1000);
+		driver.manage().window().setSize(new Dimension(300, 1000));
+		Thread.sleep(1000);
+		driver.manage().window().setSize(new Dimension(250, 1000));
+		Thread.sleep(1000);
+		try {
+			driver.findElement(By.className("overlayimg")).click();
+			Thread.sleep(1000);
 			Assert.assertTrue(true);
 		} catch (NoSuchElementException e) {
 			Assert.assertTrue(false);
