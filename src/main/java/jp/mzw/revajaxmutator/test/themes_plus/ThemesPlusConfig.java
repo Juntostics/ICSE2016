@@ -19,6 +19,8 @@ import jp.gr.java_conf.daisy.ajax_mutator.mutator.replacing_among.RequestOnSucce
 import jp.gr.java_conf.daisy.ajax_mutator.mutator.replacing_among.RequestUrlRAMutator;
 import jp.gr.java_conf.daisy.ajax_mutator.mutator.replacing_among.TimerEventCallbackRAMutator;
 import jp.gr.java_conf.daisy.ajax_mutator.mutator.replacing_among.TimerEventDurationRAMutator;
+import jp.gr.java_conf.daisy.ajax_mutator.mutator.DOMSelectionSelectNearbyMutator;
+import jp.mzw.revajaxmutator.fixer.DOMSelectionSelectGivenFixer;
 import jp.mzw.revajaxmutator.MutateConfigurationBase;
 import jp.mzw.revajaxmutator.mutator.JQueryAsyncCommMethodMutator;
 
@@ -79,21 +81,8 @@ public class ThemesPlusConfig {
 //                    new AttributeModificationValueRAMutator(visitor.getAttributeModifications())
 //                    );
 	        
-	        mutators = ImmutableSet.<Mutator>of(
-//	        		new JQueryAsyncCommMethodMutator(),
-//	        		new EventTargetRAMutator(visitor.getEventAttachments()),
-//	                new EventTypeRAMutator(visitor.getEventAttachments()),
-//	                new EventCallbackRAMutator(visitor.getEventAttachments()),
-//	                new TimerEventDurationRAMutator(visitor.getTimerEventAttachmentExpressions()),
-//	                new TimerEventCallbackRAMutator(visitor.getTimerEventAttachmentExpressions()),
-//	                new AppendedDOMRAMutator(visitor.getDomAppendings()),
-//	                new AttributeModificationTargetRAMutator(visitor.getAttributeModifications()),
-//	                new AttributeModificationValueRAMutator(visitor.getAttributeModifications()),
-//	                new DOMSelectionSelectNearbyMutator(),
-//	                new RequestOnSuccessHandlerRAMutator(visitor.getRequests()),
-	                new RequestMethodRAMutator(visitor.getRequests())
-//	                new RequestUrlRAMutator(visitor.getRequests())
-	        		);
+            mutators = ImmutableSet.<Mutator> of(
+                    new DOMSelectionSelectGivenFixer("\"#timer\""));
 	    }
 	}
 }

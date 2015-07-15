@@ -47,6 +47,7 @@ public class TaggedGalleryTest extends WebAppTestBase {
 		try {
 			String src = driver.findElement(By.id("img")).getAttribute("src");
 			
+			// regression test
 			// src doesn't contain "null"
 			Assert.assertTrue(!src.contains("null"));
 		} catch (NoSuchElementException e) {
