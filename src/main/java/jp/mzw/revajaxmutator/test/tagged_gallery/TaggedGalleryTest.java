@@ -53,6 +53,20 @@ public class TaggedGalleryTest extends WebAppTestBase {
 	}
 
 	@Test
+	public void removeImageTest() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tagged-gallery")).get(0).click();
+			Assert.assertTrue(!driver.findElement(By.id("img")).getCssValue("position").isEmpty());
+			driver.findElement(By.id("img")).click();
+			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+		
+	}
+
+	@Test
 	public void existImageTest() throws Exception {
 		driver.get(URL);
 		try {
