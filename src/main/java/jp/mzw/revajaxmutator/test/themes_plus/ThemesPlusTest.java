@@ -36,25 +36,36 @@ public class ThemesPlusTest extends WebAppTestBase {
 //		WebAppTestBase.afterTestClass();
 	}
 
-	@Test
-	public void testCountdown() throws Exception {
-		driver.get(URL);
-		int startSecond = getCountdownTimerSecond();
-		Thread.sleep(3000);
-		int endSecond = getCountdownTimerSecond();
-		Assert.assertTrue(startSecond > endSecond);
-	}
+//	@Test
+//	public void testCountdown() throws Exception {
+//		driver.get(URL);
+//		int startSecond = getCountdownTimerSecond();
+//		Thread.sleep(3000);
+//		int endSecond = getCountdownTimerSecond();
+//		Assert.assertTrue(startSecond > endSecond);
+//	}
 	
 	@Test
 	public void checkWorking() throws Exception {
 		driver.get(URL);
 		try{
 			List<WebElement> spans = driver.findElement(By.id("timer")).findElements(By.tagName("span"));
-			Assert.assertTrue(spans.size() > 0);			
+			Assert.assertTrue(spans.size() > 0);
 		} catch (NoSuchElementException e) {
 			Assert.assertTrue(false);
 		}
+//		Thread.sleep(100000);
 	}	
+	@Test
+	public void checkEditPage() throws Exception {
+		driver.get("http://192.168.59.103/wp-admin/");
+
+	    driver.findElement(By.id("user_login")).sendKeys("test");
+	    driver.findElement(By.id("user_pass")).sendKeys("testtest");;
+	    driver.findElement(By.id("wp-submit")).click();
+	    driver.get("http://192.168.59.103/wp-admin/");
+	    Thread.sleep(1000000);
+	}
 	
 	private void waitUntilCountdownTimerDigitsToBePresent(){
 		WebDriverWait countdownWait = new WebDriverWait(driver, TIMEOUT);

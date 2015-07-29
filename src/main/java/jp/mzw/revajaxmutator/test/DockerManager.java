@@ -32,10 +32,10 @@ public class DockerManager {
 	
 	public static void main(String[] args) throws IOException {
 //		runContainer4WpPluginTest("mysql", "docker/blip-slideshow/wp-dbbase.dump.sql", "yuta/bs");
-//		runContainer4WpPluginTest("mysql", "docker/tagged-gallery/wp-dbbase.dump.sql", "yuta/tg");
+		runContainer4WpPluginTest("mysql", "docker/tagged-gallery/wp-dbbase.dump.sql", "yuta/tg");
 //		runContainer4WpPluginTest("mysql", "docker/themes-plus/wp-dbbase.dump.sql", "yuta/tp");
 //		runContainer4WpPluginTest("mysql", "docker/gmedia-gallery/wp-dbbase.dump.sql", "yuta/gg");
-		runContainer4WpPluginTest("mysql", "docker/editorial-calendar/wp-dbbase.dump.sql", "yuta/ec");
+//		runContainer4WpPluginTest("mysql", "docker/editorial-calendar/wp-dbbase.dump.sql", "yuta/ec");
 //		runContainer4WpPluginTest("mysql", "docker/smart-forms/wp-dbbase.dump.sql", "yuta/sf");
 		
 //		cleanContainer();

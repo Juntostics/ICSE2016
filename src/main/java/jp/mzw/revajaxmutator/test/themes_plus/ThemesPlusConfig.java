@@ -62,27 +62,29 @@ public class ThemesPlusConfig {
 	    @SuppressWarnings("rawtypes")
 		public MutateConfiguration() {
 	        MutateVisitorBuilder builder = MutateVisitor.defaultJqueryBuilder();
+	        
 	        builder.setRequestDetectors(ImmutableSet.of(new JQueryRequestDetector()));
 	        builder.setEventAttacherDetectors(ImmutableSet.<EventAttacherDetector>of(new JQueryEventAttachmentDetector()));
+
 	        visitor = builder.build();
 	        conductor = new MutationTestConductor();
 	        conductor.setup(PATH_TO_JS_FILE, "", visitor);
 
-//            mutators = ImmutableSet.<Mutator>of(
-//                    new EventTargetRAMutator(visitor.getEventAttachments()),
-//                    new EventTypeRAMutator(visitor.getEventAttachments()),
-//                    new EventCallbackRAMutator(visitor.getEventAttachments()),
-//                    new TimerEventDurationRAMutator(visitor.getTimerEventAttachmentExpressions()),
-//                    new TimerEventCallbackRAMutator(visitor.getTimerEventAttachmentExpressions()),
-//                    new RequestUrlRAMutator(visitor.getRequests()),
-//                    new RequestOnSuccessHandlerRAMutator(visitor.getRequests()),
-//                    new DOMSelectionSelectNearbyMutator(),
-//                    new AttributeModificationTargetRAMutator(visitor.getAttributeModifications()),
-//                    new AttributeModificationValueRAMutator(visitor.getAttributeModifications())
-//                    );
+            mutators = ImmutableSet.<Mutator>of(
+                    new EventTargetRAMutator(visitor.getEventAttachments()),
+                    new EventTypeRAMutator(visitor.getEventAttachments()),
+                    new EventCallbackRAMutator(visitor.getEventAttachments()),
+                    new TimerEventDurationRAMutator(visitor.getTimerEventAttachmentExpressions()),
+                    new TimerEventCallbackRAMutator(visitor.getTimerEventAttachmentExpressions()),
+                    new RequestUrlRAMutator(visitor.getRequests()),
+                    new RequestOnSuccessHandlerRAMutator(visitor.getRequests()),
+                    new DOMSelectionSelectNearbyMutator(),
+                    new AttributeModificationTargetRAMutator(visitor.getAttributeModifications()),
+                    new AttributeModificationValueRAMutator(visitor.getAttributeModifications())
+                    );
 	        
-            mutators = ImmutableSet.<Mutator> of(
-                    new DOMSelectionSelectGivenFixer("\"#timer\""));
+//            mutators = ImmutableSet.<Mutator> of(
+//                    new DOMSelectionSelectGivenFixer("\"#timer\""));
 	    }
 	}
 }

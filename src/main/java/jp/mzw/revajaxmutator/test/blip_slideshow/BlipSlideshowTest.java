@@ -31,7 +31,19 @@ public class BlipSlideshowTest extends WebAppTestBase {
 
 	@AfterClass
 	public static void afterTestClass() {
-		WebAppTestBase.afterTestClass();
+		try {
+			Properties config = getConfig("themes-plus.properties");
+			String jscover_report_dir = config.getProperty("jscover_report_dir") != null ? config.getProperty("jscover_report_dir") : null;
+			if(jscover_report_dir != null) {
+				File cov_result = new File(jscover_report_dir, "jscoverage.json");
+		        if (cov_result.exists()) cov_result.delete();
+		        ((JavascriptExecutor) driver).executeScript("jscoverage_report();");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+//		WebAppTestBase.afterTestClass();
 	}
 	
 	@Test
@@ -41,7 +53,9 @@ public class BlipSlideshowTest extends WebAppTestBase {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-2")));
 		
 		WebElement elm = driver.findElement(By.xpath("//*[@id='show-2']/div[1]/a[1]"));
+		Thread.sleep(100000);
 		elm.click();
+		
 	}
 	
 	@Test
