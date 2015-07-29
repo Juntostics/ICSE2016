@@ -57,7 +57,7 @@ public class TaggedGalleryTest extends WebAppTestBase {
 		driver.get(URL);
 		try {
 			driver.findElements(By.className("tagged-gallery")).get(0).click();
-			Assert.assertTrue(!driver.findElement(By.id("img")).getCssValue("position").isEmpty());
+			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
 			driver.findElement(By.id("img")).click();
 			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
 		} catch (NoSuchElementException e){
