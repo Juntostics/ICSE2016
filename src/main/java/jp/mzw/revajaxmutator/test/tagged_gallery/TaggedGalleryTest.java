@@ -37,12 +37,41 @@ public class TaggedGalleryTest extends WebAppTestBase {
 		
 	}
 	
-	
+//	No3にて削除
+//	@Test
+//	public void clickImageTest() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tagged-gallery")).get(0).click();
+//			Assert.assertTrue(driver.findElements(By.className("overlay")).size() > 0);
+//			driver.findElement(By.id("img")).click();
+//			Assert.assertTrue(driver.findElements(By.className("overlay")).size() == 0);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//		
+//	}
+//	No３にて削除
+//	@Test
+//	public void removeImageTest() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tagged-gallery")).get(0).click();
+//			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
+//			driver.findElement(By.id("img")).click();
+//			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//		
+//	}
+
 	@Test
 	public void clickImageTest() throws Exception {
 		driver.get(URL);
 		try {
-			driver.findElements(By.className("tagged-gallery")).get(0).click();
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+//			Thread.sleep(10000);
 			Assert.assertTrue(driver.findElements(By.className("overlay")).size() > 0);
 			driver.findElement(By.id("img")).click();
 			Assert.assertTrue(driver.findElements(By.className("overlay")).size() == 0);
@@ -56,7 +85,7 @@ public class TaggedGalleryTest extends WebAppTestBase {
 	public void removeImageTest() throws Exception {
 		driver.get(URL);
 		try {
-			driver.findElements(By.className("tagged-gallery")).get(0).click();
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
 			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
 			driver.findElement(By.id("img")).click();
 			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);

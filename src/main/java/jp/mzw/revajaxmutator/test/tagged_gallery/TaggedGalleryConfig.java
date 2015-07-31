@@ -26,7 +26,7 @@ import jp.gr.java_conf.daisy.ajax_mutator.mutator.replacing_to_no_op.*;
 import com.google.common.collect.ImmutableSet;
 
 public class TaggedGalleryConfig {
-	public static final String PATH_TO_JS_FILE = "record/tagged-gallery/http%3A%2F%2F192.168.59.103%3A80%2Fwp-content%2Fplugins%2Ftagged-gallery%2Fjs%2Ftg.js%3Fver%3D3.3.3";
+	public static final String PATH_TO_JS_FILE = "record/tagged-gallery/http%3A%2F%2F192.168.59.103%3A80%2Fwp-content%2Fplugins%2Ftagged-gallery%2Fjs%2Fresize.js%3Fver%3D3.3.3";
 	
 	private static String getJsFilepath() throws IOException {
 		Properties config = WebAppTestBase.getConfig("tagged-gallery.properties");
