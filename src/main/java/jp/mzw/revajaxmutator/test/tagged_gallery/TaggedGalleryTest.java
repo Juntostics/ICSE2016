@@ -184,52 +184,52 @@ public class TaggedGalleryTest extends WebAppTestBase {
 		}
 	}
 
-//	// add in no6 after
-//	@Test
-//	public void clickOverlayImg() throws Exception {
-//		driver.get(URL);
-//		try {
-//			driver.findElements(By.className("tg-resizecrop")).get(0).click();
-//			Assert.assertTrue(driver.findElements(By.className("overlayimg")).size() > 0);
-//			driver.findElement(By.className("overlayimg")).click();
-//			Assert.assertTrue(driver.findElements(By.className("overlayimg")).size() == 0);
-//		} catch (NoSuchElementException e){
-//			Assert.assertTrue(false);
-//		}
-//	}
-//	
-//	// add in no6 after
-//	@Test
-//	public void resizeWindow() throws Exception {
-//		driver.get(URL);
-//		try {
-//			driver.findElements(By.className("tg-resizecrop")).get(0).click();
-//			String val_before = driver.findElement(By.className("overlayimg")).getCssValue("margin-left");
-//			driver.manage().window().setSize(new Dimension(500, 50));
-//			String val_after = driver.findElement(By.className("overlayimg")).getCssValue("margin-left");
-//			Assert.assertFalse(val_before == val_after);
-//		} catch (NoSuchElementException e){
-//			Assert.assertTrue(false);
-//		}
-//	}
-//	
-//	// add in no6 after
-//	@Test
-//	public void resizeWindow2() throws Exception {
-//		
-//		driver.get(URL);
-//		try {
-//			driver.manage().window().setSize(new Dimension(1000, 500));
-//			driver.findElements(By.className("tg-resizecrop")).get(1).click();
-//			WebElement img = driver.findElement(By.className("overlayimg"));
-//			String val_before = img.getCssValue("margin-left");
-//			driver.manage().window().setSize(new Dimension(500, 50));
-//			String val_after = img.getCssValue("margin-left");
-//			Assert.assertFalse(val_before == val_after);
-//		} catch (NoSuchElementException e){
-//			Assert.assertTrue(false);
-//		}
-//	}
+	// add in no6 after
+	@Test
+	public void clickOverlayImg() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+			Assert.assertTrue(driver.findElements(By.className("overlayimg")).size() > 0);
+			driver.findElement(By.className("overlayimg")).click();
+			Assert.assertTrue(driver.findElements(By.className("overlayimg")).size() == 0);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// add in no6 after
+	@Test
+	public void resizeWindow() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+			String val_before = driver.findElement(By.className("overlayimg")).getCssValue("margin-left");
+			driver.manage().window().setSize(new Dimension(500, 50));
+			String val_after = driver.findElement(By.className("overlayimg")).getCssValue("margin-left");
+			Assert.assertFalse(val_before == val_after);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	}
+	
+	// add in no6 after
+	@Test
+	public void resizeWindow2() throws Exception {
+		
+		driver.get(URL);
+		try {
+			driver.manage().window().setSize(new Dimension(1000, 500));
+			driver.findElements(By.className("tg-resizecrop")).get(1).click();
+			WebElement img = driver.findElement(By.className("overlayimg"));
+			String val_before = img.getCssValue("margin-left");
+			driver.manage().window().setSize(new Dimension(500, 50));
+			String val_after = img.getCssValue("margin-left");
+			Assert.assertFalse(val_before == val_after);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	}
 	
 
 	
