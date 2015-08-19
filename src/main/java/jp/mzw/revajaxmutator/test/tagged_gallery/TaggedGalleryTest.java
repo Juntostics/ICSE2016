@@ -98,49 +98,92 @@ public class TaggedGalleryTest extends WebAppTestBase {
 
 	
 	// add in no4 before
+	// remove in no6 before
+//	@Test
+//	public void clickImageTest() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+//			Assert.assertTrue(driver.findElements(By.className("overlay")).size() > 0);
+//			driver.findElement(By.id("img")).click();
+//			Assert.assertTrue(driver.findElements(By.className("overlay")).size() == 0);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
+
+	// add in no4 before
+	// remove in no6 before
+//	@Test
+//	public void removeImageTest() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+//			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
+//			driver.findElement(By.id("img")).click();
+//			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
+
+	// add in no4 before
+	// remove in no6 before
+//	@Test
+//	public void checkImageSrc2() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+//			WebElement img = driver.findElement(By.id("img")); 
+//			Assert.assertTrue(img.getAttribute("src").matches(".*img.php.*"));
+//			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
+
+	// add in no6 before
 	@Test
 	public void clickImageTest() throws Exception {
 		driver.get(URL);
 		try {
 			driver.findElements(By.className("tg-resizecrop")).get(0).click();
 			Assert.assertTrue(driver.findElements(By.className("overlay")).size() > 0);
-			driver.findElement(By.id("img")).click();
+			driver.findElement(By.className("overlay")).click();
 			Assert.assertTrue(driver.findElements(By.className("overlay")).size() == 0);
 		} catch (NoSuchElementException e){
 			Assert.assertTrue(false);
 		}
 	}
 
-	// add in no4 before
+	// add in no6 before
 	@Test
 	public void removeImageTest() throws Exception {
 		driver.get(URL);
 		try {
 			driver.findElements(By.className("tg-resizecrop")).get(0).click();
-			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
-			driver.findElement(By.id("img")).click();
-			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
+			Assert.assertEquals("1", driver.findElement(By.className("overlayimg")).getCssValue("opacity"));
+			driver.findElement(By.className("overlay")).click();
+			Assert.assertTrue(driver.findElements(By.xpath("/html/body/div[3]")).size() == 0);
 		} catch (NoSuchElementException e){
 			Assert.assertTrue(false);
 		}
 	}
 
-	// add in no4 before
+	// add in no6 before
 	@Test
 	public void checkImageSrc2() throws Exception {
 		driver.get(URL);
 		try {
 			driver.findElements(By.className("tg-resizecrop")).get(0).click();
-			WebElement img = driver.findElement(By.id("img")); 
-			Assert.assertTrue(img.getAttribute("src").matches(".*img.php.*"));
-			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
+			WebElement img = driver.findElement(By.xpath("/html/body/div[3]/img"));
+			Assert.assertTrue(img.getAttribute("src").matches(".*icse2016-logo.*"));
+			Assert.assertEquals("auto", img.getCssValue("z-index"));
 		} catch (NoSuchElementException e){
 			Assert.assertTrue(false);
 		}
 	}
 
-	
-	
 	// add in no2 before
 //	@Test
 //	public void checkImageSrc2() throws Exception {

@@ -37,11 +37,11 @@ public class ThemesPlusTest extends WebAppTestBase {
 //		WebAppTestBase.afterTestClass();
 	}
 	
-	@Test
-	public void testCheckWork(){
-		driver.get(URL);
-		Assert.assertTrue(driver.findElements(By.className("recentposts")).size() > 0);
-	}
+//	@Test
+//	public void testCheckWork(){
+//		driver.get(URL);
+//		Assert.assertTrue(driver.findElements(By.className("recentposts")).size() > 0);
+//	}
 
 //	@Test
 //	public void testCountdown() throws Exception {
@@ -53,16 +53,16 @@ public class ThemesPlusTest extends WebAppTestBase {
 //	}
 
 
-//	@Test
-//	public void checkWorking() throws Exception {
-//		driver.get(URL);
-//		try{
-//			List<WebElement> spans = driver.findElement(By.id("timer")).findElements(By.tagName("span"));
-//			Assert.assertTrue(spans.size() > 0);
-//		} catch (NoSuchElementException e) {
-//			Assert.assertTrue(false);
-//		}
-//	}
+	@Test
+	public void checkWorking() throws Exception {
+		driver.get(URL);
+		try{
+			List<WebElement> spans = driver.findElement(By.id("timer")).findElements(By.tagName("span"));
+			Assert.assertTrue(spans.size() > 0);
+		} catch (NoSuchElementException e) {
+			Assert.assertTrue(false);
+		}
+	}
 	
 	private void waitUntilCountdownTimerDigitsToBePresent(){
 		WebDriverWait countdownWait = new WebDriverWait(driver, TIMEOUT);
