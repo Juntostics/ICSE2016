@@ -64,7 +64,20 @@ public class TaggedGalleryTest extends WebAppTestBase {
 		} catch (NoSuchElementException e){
 			Assert.assertTrue(false);
 		}
-		
+	}
+	
+	// add in no1 after
+	@Test
+	public void checkImageSrc() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tagged-gallery")).get(0).click();
+			WebElement img = driver.findElement(By.id("img")); 
+			Assert.assertTrue(img.getAttribute("src").matches(".*img.php.*"));
+			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
 	}
 
 	// No6の作業中にて削除
