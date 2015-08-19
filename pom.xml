@@ -8,7 +8,7 @@
 	<repositories>
 		<repository>
 			<id>mzw.mvn.repo</id>
-			<url>http://mzw.jp/mvn-repo</url>
+			<url>http://mvn-repo.mzw.jp</url>
 		</repository>
 	</repositories>
 

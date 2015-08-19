@@ -11,6 +11,7 @@ import jp.mzw.revajaxmutator.test.WebAppTestBase;
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.owasp.webscarab.model.StoreException;
 
@@ -35,6 +36,12 @@ public class ThemesPlusTest extends WebAppTestBase {
 		}
 //		WebAppTestBase.afterTestClass();
 	}
+	
+	@Test
+	public void testCheckWork(){
+		driver.get(URL);
+		Assert.assertTrue(driver.findElements(By.className("recentposts")).size() > 0);
+	}
 
 //	@Test
 //	public void testCountdown() throws Exception {
@@ -44,28 +51,18 @@ public class ThemesPlusTest extends WebAppTestBase {
 //		int endSecond = getCountdownTimerSecond();
 //		Assert.assertTrue(startSecond > endSecond);
 //	}
-	
-	@Test
-	public void checkWorking() throws Exception {
-		driver.get(URL);
-		try{
-			List<WebElement> spans = driver.findElement(By.id("timer")).findElements(By.tagName("span"));
-			Assert.assertTrue(spans.size() > 0);
-		} catch (NoSuchElementException e) {
-			Assert.assertTrue(false);
-		}
-//		Thread.sleep(100000);
-	}	
-	@Test
-	public void checkEditPage() throws Exception {
-		driver.get("http://192.168.59.103/wp-admin/");
 
-	    driver.findElement(By.id("user_login")).sendKeys("test");
-	    driver.findElement(By.id("user_pass")).sendKeys("testtest");;
-	    driver.findElement(By.id("wp-submit")).click();
-	    driver.get("http://192.168.59.103/wp-admin/");
-	    Thread.sleep(1000000);
-	}
+
+//	@Test
+//	public void checkWorking() throws Exception {
+//		driver.get(URL);
+//		try{
+//			List<WebElement> spans = driver.findElement(By.id("timer")).findElements(By.tagName("span"));
+//			Assert.assertTrue(spans.size() > 0);
+//		} catch (NoSuchElementException e) {
+//			Assert.assertTrue(false);
+//		}
+//	}
 	
 	private void waitUntilCountdownTimerDigitsToBePresent(){
 		WebDriverWait countdownWait = new WebDriverWait(driver, TIMEOUT);
@@ -82,5 +79,20 @@ public class ThemesPlusTest extends WebAppTestBase {
 		waitUntilCountdownTimerDigitsToBePresent();
 		return Integer.valueOf(countdownTimerDigits.get(countdownTimerDigits.size()-1).getText().trim());
 	}
-
+	
+	private void click(By by){
+		driver.findElement(by).click();
+	}
+	
+//	private void loginAdmin() throws InterruptedException{
+//		driver.get(ADMIN_URL);
+//	    driver.findElement(By.id("user_login")).sendKeys("test");
+//	    driver.findElement(By.id("user_pass")).sendKeys("testtest");
+//	    click(By.id("wp-submit"));
+//	    Thread.sleep(500);
+//	    click(By.xpath("/html/body/div/div[1]/div[2]/ul/li[3]/a"));
+//	    Thread.sleep(500);
+//	    click(By.xpath("/html/body/div/div[2]/div[2]/div[1]/div[4]/h2/a"));
+//	    Thread.sleep(500);
+//	}
 }

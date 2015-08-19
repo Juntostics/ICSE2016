@@ -1,4 +1,4 @@
-package jp.mzw.revajaxmutator.test.tagged_gallery;
+package jp.mzw.revajaxmutator.test.blip_slideshow;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,6 @@ import jp.gr.java_conf.daisy.ajax_mutator.detector.AbstractDetector;
 import jp.gr.java_conf.daisy.ajax_mutator.detector.EventAttacherDetector;
 import jp.gr.java_conf.daisy.ajax_mutator.detector.dom_manipulation_detector.*;
 import jp.gr.java_conf.daisy.ajax_mutator.detector.event_detector.*;
-import jp.gr.java_conf.daisy.ajax_mutator.detector.jquery.*;
 import jp.gr.java_conf.daisy.ajax_mutator.mutatable.*;
 import jp.gr.java_conf.daisy.ajax_mutator.mutator.DOMSelectionSelectNearbyMutator;
 import jp.gr.java_conf.daisy.ajax_mutator.mutator.Mutator;
@@ -26,11 +25,9 @@ import jp.gr.java_conf.daisy.ajax_mutator.mutator.replacing_to_no_op.*;
 
 import com.google.common.collect.ImmutableSet;
 
-public class TaggedGalleryConfig {
-	public static final String PATH_TO_JS_FILE = "record/tagged-gallery/http%3A%2F%2F192.168.59.103%3A80%2Fwp-content%2Fplugins%2Ftagged-gallery%2Fjs%2Ftg.js%3Fver%3D3.3.3";
-	//./ram.sh mutate   jp.mzw.revajaxmutator.test.tagged_gallery.TaggedGalleryConfig\$MutateConfiguration
-	//./ram.sh analysis jp.mzw.revajaxmutator.test.tagged_gallery.TaggedGalleryConfig\$MutateConfiguration     jp.mzw.revajaxmutator.test.tagged_gallery.TaggedGalleryTest
-	//./ram.sh history record/tagged-gallery/mutants /Users/hnd-lab/workspace/RevAjaxMutatorTest
+public class BlipSlideshowConfig {
+	public static final String PATH_TO_JS_FILE = "record/tagged-gallery/http%3A%2F%2F192.168.59.103%3A80%2Fwp-content%2Fplugins%2Ftagged-gallery%2Fjs%2Ftgbox.jquery.js%3Fver%3D3.3.3";
+	
 	private static String getJsFilepath() throws IOException {
 		Properties config = WebAppTestBase.getConfig("tagged-gallery.properties");
 		String dir = config.getProperty("ram_record_dir");
@@ -60,53 +57,45 @@ public class TaggedGalleryConfig {
         @SuppressWarnings("rawtypes")
         
         public MutateConfiguration() throws IOException {
-            MutateVisitorBuilder builder = MutateVisitor.emptyBuilder();
-            builder.setAttributeModificationDetectors(
-                    ImmutableSet.of(
-                                    new AttributeAssignmentDetector(),
-                                    new SetAttributeDetector(),
-                                    new JQueryAttributeModificationDetector()));
+        	System.out.println("===============================");
+        	System.out.println(PATH_TO_JS_FILE);
+            MutateVisitorBuilder builder = MutateVisitor.defaultJqueryBuilder();
+
+            builder.setEventAttacherDetectors(ImmutableSet.<EventAttacherDetector>of(
+            		new AttachEventDetector()));
             
-            builder.setDomAppendingDetectors(
-                    ImmutableSet.of(
-                                    new AppendChildDetector(),
-                                    new JQueryAppendDetector()));
-            builder.setDomCreationDetectors(
-                    ImmutableSet.of(
-                                    new CreateElementDetector()));
-            builder.setDomCloningDetectors(
-                    ImmutableSet.of(
-                                    new CloneNodeDetector(),
-                                    new JQueryCloneDetector()));
-            builder.setDomNormalizationDetectors(
-                    ImmutableSet.of(
-                                    new DOMNormalizationDetector()));
-            builder.setDomReplacementDetectors(
-                    ImmutableSet.of(
-                                    new ReplaceChildDetector(),
-                                    new JQueryReplaceWithDetector()));
-            builder.setDomRemovalDetectors(
-                    ImmutableSet.of(
-                                    new RemoveChildDetector(),
-                                    new JQueryRemoveDetector()));
-            builder.setDomSelectionDetectors(
-                    ImmutableSet.of(
-                                    new DOMSelectionDetector(),
-                                    new JQueryDOMSelectionDetector()));
-            builder.setEventAttacherDetectors(
-                    ImmutableSet.<EventAttacherDetector>of(
-                                    new AddEventListenerDetector(),
-                                    new AttachEventDetector(),
-                                    new JQueryEventAttachmentDetector()));
-            builder.setTimerEventDetectors(
-                    ImmutableSet.of(
-                                    new TimerEventDetector()));
-            builder.setRequestDetectors(
-                    ImmutableSet.of(
-                                    new JQueryRequestDetector()));
+            builder.setTimerEventDetectors(ImmutableSet.<TimerEventDetector>of(
+            		new TimerEventDetector()));
+            
+            builder.setDomSelectionDetectors(ImmutableSet.<AbstractDetector<DOMSelection>>of(
+                    new DOMSelectionDetector()));
+                        
+            builder.setDomNormalizationDetectors(ImmutableSet.<AbstractDetector<DOMNormalization>>of(
+            		new DOMNormalizationDetector()));
+            
+            builder.setAttributeModificationDetectors(ImmutableSet.<AbstractDetector<AttributeModification>>of(
+            		new AttributeAssignmentDetector()));
+
+            builder.setAttributeModificationDetectors(ImmutableSet.<AbstractDetector<AttributeModification>>of(
+            		new SetAttributeDetector()));
+            
+            builder.setDomCreationDetectors(ImmutableSet.<AbstractDetector<DOMCreation>>of(
+            		new CreateElementDetector()));
+            
+            builder.setDomRemovalDetectors(ImmutableSet.<AbstractDetector<DOMRemoval>>of(
+            		new RemoveChildDetector()));
+//problem            
+            builder.setDomAppendingDetectors(ImmutableSet.<AbstractDetector<DOMAppending>>of(
+            		new AppendChildDetector()));
+
+            builder.setDomReplacementDetectors(ImmutableSet.<AbstractDetector<DOMReplacement>>of(
+            		new ReplaceChildDetector()));
+            
+            builder.setDomCloningDetectors(ImmutableSet.<AbstractDetector<DOMCloning>>of(
+            		new CloneNodeDetector()));
             
             visitor = builder.build();
- 
+
             conductor = new MutationTestConductor();
             conductor.setup(PATH_TO_JS_FILE, "", visitor);
 

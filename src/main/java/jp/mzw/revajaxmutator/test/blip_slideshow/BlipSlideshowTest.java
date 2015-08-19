@@ -9,6 +9,7 @@ import org.junit.*;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.owasp.webscarab.model.StoreException;
 
@@ -46,37 +47,77 @@ public class BlipSlideshowTest extends WebAppTestBase {
 //		WebAppTestBase.afterTestClass();
 	}
 	
+	//first test
 	@Test
-	public void displaySlideshow() throws InterruptedException {
+	public void checkWorking() throws InterruptedException{
 		driver.get(URL);
-//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-1")));
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-2")));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("slideshow")));
 		
-		WebElement elm = driver.findElement(By.xpath("//*[@id='show-2']/div[1]/a[1]"));
-		Thread.sleep(100000);
-		elm.click();
-		
+		List<WebElement> elms = driver.findElements(By.className("slideshow")).get(0).findElements(By.tagName("div"));
+		Assert.assertTrue(elms.size() > 0);
+		Thread.sleep(10000000);
+		driver.findElements(By.className("slideshow")).get(0).findElements(By.tagName("a")).get(0).click();
 	}
-	
-	@Test
-	public void testGetCommMethod() throws InterruptedException, IOException, StoreException {
-		// filter POST communications
-		RevAjaxMutatorBase.relaunchProxyServerWith(
-				new FilterPlugin("http://192.168.59.103:80/blip-slideshow-test/", "POST"));
-		disableFilterPlugin = true;
-		
-		driver.get(URL);
-		
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-2")));
-		WebElement elm = driver.findElement(By.xpath("//*[@id='show-1']/div[1]/a[1]"));
 
-		try {
-			elm.click();
-			Assert.assertTrue(true);
-		} catch (NoSuchElementException e) {
-			Assert.assertTrue(false);
-		}
+	@Test
+	public void clickImage() throws InterruptedException{
+		driver.get(URL);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("slideshow")));
+		
+		List<WebElement> elms = driver.findElements(By.className("slideshow")).get(0).findElements(By.tagName("div"));
+		Assert.assertTrue(elms.size() > 0);
 	}
+
+	
+//	@Test
+//	public void displaySlideshow() throws InterruptedException {
+//		driver.get(URL);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-1")));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-2")));
+//		
+//		WebElement elm = driver.findElement(By.xpath("//*[@id='show-2']/div[1]/a[1]"));
+//		elm.click();
+//	}
+//			
+//	
+//	@Test
+//	public void stopSlider() throws InterruptedException {
+//		driver.get(URL);
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-1")));
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-2")));
+//		
+//		Actions actions = new Actions(driver);
+//		WebElement target = driver.findElement(By.xpath("/html/body/div/div/div/div/article/div/div[2]"));
+//		actions.moveToElement(target);
+//		actions.perform();
+//		
+//		Thread.sleep(1000);
+//		
+//		WebElement elm = driver.findElement(By.xpath("/html/body/div/div/div/div/article/div/div[2]/div[3]/ul/li[3]/a"));
+//		elm.click();
+//	}
+//	
+	
+//	Default set test
+//	@Test
+//	public void testGetCommMethod() throws InterruptedException, IOException, StoreException {
+//		// filter POST communications
+//		RevAjaxMutatorBase.relaunchProxyServerWith(
+//				new FilterPlugin("http://192.168.59.103:80/blip-slideshow-test/", "POST"));
+//		disableFilterPlugin = true;
+//		
+//		driver.get(URL);
+//		
+//		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("show-2")));
+//		WebElement elm = driver.findElement(By.xpath("//*[@id='show-1']/div[1]/a[1]"));
+//
+//		try {
+//			elm.click();
+//			Assert.assertTrue(true);
+//		} catch (NoSuchElementException e) {
+//			Assert.assertTrue(false);
+//		}
+//	}
 	
 	private boolean disableFilterPlugin = false;
 	@Rule

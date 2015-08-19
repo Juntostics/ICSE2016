@@ -26,6 +26,7 @@ import org.owasp.webscarab.plugin.proxy.ProxyPlugin;
 public class WebAppTestBase {
 
 	protected static String URL;
+	protected static String ADMIN_URL;
     protected static WebDriver driver;
     protected static WebDriverWait wait;
 
@@ -118,6 +119,7 @@ public class WebAppTestBase {
     	Properties config = getConfig(filename);
 		
 		URL = config.getProperty("url") != null ? config.getProperty("url") : "";
+		ADMIN_URL = config.getProperty("admin_url") != null ? config.getProperty("admin_url") : "";
 		
 		String proxy = config.getProperty("proxy") != null ? config.getProperty("proxy") : "";
 		// JSCover
