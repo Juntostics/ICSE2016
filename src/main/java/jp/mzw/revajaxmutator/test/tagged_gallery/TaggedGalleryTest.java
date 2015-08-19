@@ -37,34 +37,34 @@ public class TaggedGalleryTest extends WebAppTestBase {
 	}
 
 	//	add in no1 before
-	//	No3の作業中にて削除
-	@Test
-	public void clickImageTest() throws Exception {
-		driver.get(URL);
-		try {
-			driver.findElements(By.className("tagged-gallery")).get(0).click();
-			Assert.assertTrue(driver.findElements(By.className("overlay")).size() > 0);
-			driver.findElement(By.id("img")).click();
-			Assert.assertTrue(driver.findElements(By.className("overlay")).size() == 0);
-		} catch (NoSuchElementException e){
-			Assert.assertTrue(false);
-		}
-		
-	}
+	//	remove in no4 before
+//	@Test
+//	public void clickImageTest() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tagged-gallery")).get(0).click();
+//			Assert.assertTrue(driver.findElements(By.className("overlay")).size() > 0);
+//			driver.findElement(By.id("img")).click();
+//			Assert.assertTrue(driver.findElements(By.className("overlay")).size() == 0);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
+
 	//	add in no1 before
-	//	No３の作業中にて削除
-	@Test
-	public void removeImageTest() throws Exception {
-		driver.get(URL);
-		try {
-			driver.findElements(By.className("tagged-gallery")).get(0).click();
-			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
-			driver.findElement(By.id("img")).click();
-			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
-		} catch (NoSuchElementException e){
-			Assert.assertTrue(false);
-		}
-	}
+	//	remove in no4 before
+//	@Test
+//	public void removeImageTest() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tagged-gallery")).get(0).click();
+//			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
+//			driver.findElement(By.id("img")).click();
+//			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
 	
 	// add in no1 after
 	// rm in no2 before
@@ -82,18 +82,63 @@ public class TaggedGalleryTest extends WebAppTestBase {
 //	}
 
 	// add in no2 before
+	// remove in no4 before
+//	@Test
+//	public void checkImageSrc2() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tagged-gallery")).get(0).click();
+//			WebElement img = driver.findElement(By.id("img")); 
+//			Assert.assertTrue(img.getAttribute("src").matches(".*null.*"));
+//			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
+
+	
+	// add in no4 before
+	@Test
+	public void clickImageTest() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+			Assert.assertTrue(driver.findElements(By.className("overlay")).size() > 0);
+			driver.findElement(By.id("img")).click();
+			Assert.assertTrue(driver.findElements(By.className("overlay")).size() == 0);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	}
+
+	// add in no4 before
+	@Test
+	public void removeImageTest() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+			Assert.assertEquals("1", driver.findElement(By.id("img")).getCssValue("opacity"));
+			driver.findElement(By.id("img")).click();
+			Assert.assertTrue(driver.findElements(By.id("img")).size() == 0);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	}
+
+	// add in no4 before
 	@Test
 	public void checkImageSrc2() throws Exception {
 		driver.get(URL);
 		try {
-			driver.findElements(By.className("tagged-gallery")).get(0).click();
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
 			WebElement img = driver.findElement(By.id("img")); 
-			Assert.assertTrue(img.getAttribute("src").matches(".*null.*"));
+			Assert.assertTrue(img.getAttribute("src").matches(".*img.php.*"));
 			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
 		} catch (NoSuchElementException e){
 			Assert.assertTrue(false);
 		}
 	}
+
 	
 	
 	// add in no2 before
