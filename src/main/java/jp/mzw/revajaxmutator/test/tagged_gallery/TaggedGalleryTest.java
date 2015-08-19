@@ -197,6 +197,22 @@ public class TaggedGalleryTest extends WebAppTestBase {
 			Assert.assertTrue(false);
 		}
 	}
+	
+	// add in no6 after
+	@Test
+	public void resizeWindow() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+			String val_before = driver.findElement(By.className("overlayimg")).getCssValue("margin-left");
+			driver.manage().window().setSize(new Dimension(500, 50));
+			String val_after = driver.findElement(By.className("overlayimg")).getCssValue("margin-left");
+			Assert.assertFalse(val_before == val_after);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	}
+	
 
 	
 	
