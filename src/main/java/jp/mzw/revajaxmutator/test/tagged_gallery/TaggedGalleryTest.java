@@ -184,6 +184,22 @@ public class TaggedGalleryTest extends WebAppTestBase {
 		}
 	}
 
+	// add in no6 after
+	@Test
+	public void clickOverlayImg() throws Exception {
+		driver.get(URL);
+		try {
+			driver.findElements(By.className("tg-resizecrop")).get(0).click();
+			Assert.assertTrue(driver.findElements(By.className("overlayimg")).size() > 0);
+			driver.findElement(By.className("overlay")).click();
+			Assert.assertTrue(driver.findElements(By.className("overlayimg")).size() == 0);
+		} catch (NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	}
+
+	
+	
 	// add in no2 before
 //	@Test
 //	public void checkImageSrc2() throws Exception {
