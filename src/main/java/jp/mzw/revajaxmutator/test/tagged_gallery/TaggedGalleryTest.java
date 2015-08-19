@@ -67,18 +67,48 @@ public class TaggedGalleryTest extends WebAppTestBase {
 	}
 	
 	// add in no1 after
+	// rm in no2 before
+//	@Test
+//	public void checkImageSrc1() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tagged-gallery")).get(0).click();
+//			WebElement img = driver.findElement(By.id("img")); 
+//			Assert.assertTrue(img.getAttribute("src").matches(".*img.php.*"));
+//			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
+
+	// add in no2 before
 	@Test
-	public void checkImageSrc() throws Exception {
+	public void checkImageSrc2() throws Exception {
 		driver.get(URL);
 		try {
 			driver.findElements(By.className("tagged-gallery")).get(0).click();
 			WebElement img = driver.findElement(By.id("img")); 
-			Assert.assertTrue(img.getAttribute("src").matches(".*img.php.*"));
+			Assert.assertTrue(img.getAttribute("src").matches(".*null.*"));
 			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
 		} catch (NoSuchElementException e){
 			Assert.assertTrue(false);
 		}
 	}
+	
+	
+	// add in no2 before
+//	@Test
+//	public void checkImageSrc2() throws Exception {
+//		driver.get(URL);
+//		try {
+//			driver.findElements(By.className("tagged-gallery")).get(0).click();
+//			WebElement img = driver.findElement(By.id("img")); 
+//			Assert.assertTrue(img.getAttribute("src").matches(".*tagged-gallery-test.*"));
+//			Assert.assertTrue(Integer.parseInt(img.getCssValue("z-index")) > 5);
+//		} catch (NoSuchElementException e){
+//			Assert.assertTrue(false);
+//		}
+//	}
 
 	// No6の作業中にて削除
 //	@Test
