@@ -24,7 +24,27 @@ public class QuizzyTest extends WebAppTestBase {
 		WebAppTestBase.beforeTestClass("quizzy.properties");
 	}
 
-	 
+	@Test
+	public void hideDiscriptionTest() throws InterruptedException{
+		driver.get(URL);
+		waitUntilShowWidgets();
+		try{
+			driver.findElement(By.id("quizzy_quiz_opt" + FIRST_ITEM_ID)).click();
+			waitUntilSlideAnimationEnd();
+			String secondItemDiscription = driver.findElement(By.id("quizzy_quiz_desc" + SECOND_ITEM_ID)).getText().trim();
+			
+			if("".equals(secondItemDiscription)){
+				Assert.assertTrue(true);
+			}else if(SECOND_ITEM_TEXT.equals(secondItemDiscription)){
+				Assert.assertTrue(false);
+			}else{
+				Assert.assertTrue(false);
+			}
+
+		}catch(NoSuchElementException e){
+			Assert.assertTrue(false);
+		}
+	} 
 	
 	private void waitUntilShowWidgets(){
 		WebDriverWait countdownWait = new WebDriverWait(driver, TIMEOUT);
